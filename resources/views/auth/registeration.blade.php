@@ -21,8 +21,8 @@
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
                 @error('email')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="input-grp">
                 <label for="password">Password</label>

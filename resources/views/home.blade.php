@@ -21,33 +21,32 @@
     <main class="content">
         <!-- Top Bar -->
         <header class="top-bar">
-            <h1>News Dashboard</h1>
-            <input type="text" placeholder="Search news...">
+            <h1>@php $selectedCategory = request('category', 'All News');  echo $selectedCategory; @endphp</h1>
+            <form action="{{ route('dashboard') }}" method="GET" class="search-form">
+                <input type="hidden" value="@php
+                echo $selectedCategory;
+                @endphp" name="category">
+                <input type="text" name="search" class="searchInput" placeholder="Search news..." value="{{     request('search') }}">
+                <button type="submit">Search</button>
+            </form>
         </header>
-
         <!-- News Section -->
-        <section class="news-container">
-            <article class="news-card">
-                <img src="https://source.unsplash.com/400x200/?news" alt="News">
-                <h3>Breaking News Headline</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <a href="#">Read More</a>
-            </article>
-
-            <article class="news-card">
-                <img src="https://source.unsplash.com/400x200/?politics" alt="News">
-                <h3>Politics Today</h3>
-                <p>Curabitur at justo vehicula, varius orci at, varius sapien.</p>
-                <a href="#">Read More</a>
-            </article>
-
-            <article class="news-card">
-                <img src="https://source.unsplash.com/400x200/?sports" alt="News">
-                <h3>Sports Update</h3>
-                <p>Pellentesque sit amet purus eu ligula aliquet commodo.</p>
-                <a href="#">Read More</a>
-            </article>
+        <section class="news-container" id="newsContainer">
+            @forelse ($news as $article)
+                <article class="news-card">
+                    <img src="{{ $article->image ?? 'https://source.unsplash.com/400x200/?news' }}" alt="News">
+                    <h3>{{ $article->title }}</h3>
+                    <p class="news-content">{{ $article->content }}</p>
+                    <a href="{{ $article->source_url }}" target="_blank">Read More</a>
+                </article>
+            @empty
+                <p>No description available in this category.</p>
+            @endforelse
         </section>
+         <!-- Pagination Links -->
+         <div class="pagination-container">
+            {{ $news->appends(['category' => request('category')])->links('vendor.pagination.default') }}
+        </div>
     </main>
     <div id="toast-container"></div>
 </div>

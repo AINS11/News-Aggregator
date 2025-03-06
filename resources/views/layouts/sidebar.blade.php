@@ -7,15 +7,16 @@
     <div class="divider"></div>
     <nav>
         <ul>
-            <li><a href="#">All News</a></li>
-            <li><a href="#">Latest News</a></li>
-            <li><a href="#">Science</a></li>
-            <li><a href="#">Sports</a></li>
-            <li><a href="#">Settings</a></li>
+            @php $selectedCategory = request('category', 'All News'); @endphp
+            <li><a href="{{ route('dashboard', ['category' => 'All News']) }}" class="{{ $selectedCategory == 'All News' ? 'active' : '' }}">All News</a></li>
+            <li><a href="{{ route('dashboard', ['category' => 'Health']) }}" class="{{ $selectedCategory == 'Health' ? 'active' : '' }}">Health</a></li>
+            <li><a href="{{ route('dashboard', ['category' => 'Technology']) }}" class="{{ $selectedCategory == 'Technology' ? 'active' : '' }}">Technology</a></li>
+            <li><a href="{{ route('dashboard', ['category' => 'Sport']) }}" class="{{ $selectedCategory == 'Sport' ? 'active' : '' }}">Sports</a></li>
+            <li><a href="{{ route('dashboard', ['category' => 'Politics']) }}" class="{{ $selectedCategory == 'Politics' ? 'active' : '' }}">Politics</a></li>
             <li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="logout-btn">Logout</button>
+                    <button type="button" class="logout-btn" id="logout-btn">Logout</button>
                 </form>
             </li>
         </ul>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -28,9 +29,10 @@ Route::get('reset-password/{token}', [ResetPasswordController::class, 'showReset
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['verify.session.token'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('home');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('home');
+    // })->name('dashboard');
+    Route::get('/dashboard', [ArticleController::class, 'ShowNews'])->name('dashboard');
 });
 
 

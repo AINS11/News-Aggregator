@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Confirm logout action
     confirmLogoutBtn.addEventListener("click", function () {
         modal.style.display = "none";
-        window.location.href = "/logout"; // Replace with actual logout route
+        document.getElementById("logout-form").submit();
     });
 
     // Close modal if clicked outside the content area
