@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
 {
+    use HasFactory; 
     protected $fillable = ['title', 'content', 'image', 'source_url', 'category_id'];
 
     public function category() {

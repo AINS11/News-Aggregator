@@ -19,7 +19,7 @@ Route::get('/', function () {
     if (!session()->has('auth_token')) {
         return redirect('/login')->with('error', 'Session expired. Please log in again.');
     }
-    return redirect()->route('dashboard');
+    return redirect()->route('dashboard')->setStatusCode(200);
 });
 
 Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
@@ -28,7 +28,7 @@ Route::get('reset-password/{token}', [ResetPasswordController::class, 'showReset
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::middleware(['verify.session.token'])->group(function () {
+Route::middleware(['auth', 'verify.session.token'])->group(function () {
     Route::get('/dashboard', [ArticleController::class, 'ShowNews'])->middleware('throttle:15,1')->name('dashboard');
 });
 
