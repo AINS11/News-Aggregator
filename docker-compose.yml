@@ -8,7 +8,7 @@ services:
     ports:
       - "8000:8000"  # Change Apache port mapping if needed
     environment:
-      APP_NAME: "New-Aggregator"
+      APP_NAME: "News-Aggregator"
       APP_ENV: "local"
       APP_DEBUG: "true"
       APP_URL: "http://localhost:8000"
@@ -25,7 +25,7 @@ services:
       MAIL_PASSWORD: "xejrxljcyvlktzbp"
       MAIL_ENCRYPTION: "tls"
       MAIL_FROM_ADDRESS: "ahireshubham383@gmail.com"
-      MAIL_FROM_NAME: "New-Aggregator"
+      MAIL_FROM_NAME: "News-Aggregator"
 
     command: sh -c "php artisan serve --host=0.0.0.0 --port=8000"
 
@@ -34,12 +34,24 @@ services:
       - node
 
   db:
+    image: mysql:8.0
+    container_name: news-aggregator-db
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "news_aggregator"
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: news-aggregator-phpmyadmin
     restart: always
     environment:
       PMA_HOST: "db"
-      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
       - "8080:80"
 
