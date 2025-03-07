@@ -15,4 +15,12 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        host: "0.0.0.0",
+        port: 5173,
+        strictPort: true,
+        hmr: {
+            clientPort: 5173, // <-- Use this if running in Docker
+          }
+      }
 });

@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  app:
+    image: php:8.2.4-apache
+    container_name: news-aggregator-app
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:8000"  # Change Apache port mapping if needed
+    environment:
+      APP_NAME: "New-Aggregator"
+      APP_ENV: "local"
+      APP_DEBUG: "true"
+      APP_URL: "http://localhost:8000"
+
+      DB_CONNECTION: "mysql"
+      DB_HOST: "db"
+      DB_PORT: "3306"
+      DB_DATABASE: "news_aggregator"
+
+      MAIL_MAILER: "smtp"
+      MAIL_HOST: "smtp.gmail.com"
+      MAIL_PORT: "587"
+      MAIL_USERNAME: "ahireshubham383@gmail.com"
+      MAIL_PASSWORD: "xejrxljcyvlktzbp"
+      MAIL_ENCRYPTION: "tls"
+      MAIL_FROM_ADDRESS: "ahireshubham383@gmail.com"
+      MAIL_FROM_NAME: "New-Aggregator"
+
+    command: sh -c "php artisan serve --host=0.0.0.0 --port=8000"
+
+    depends_on:
+      - db
+      - node
+
+  db:
+    image: phpmyadmin/phpmyadmin
+    container_name: news-aggregator-phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: "db"
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - "8080:80"
+
+  node:
+    image: node:18
+    container_name: news-aggregator-node
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "5173:5173"  # Vite default port
+    command: ["npm", "run", "dev"]
+
+volumes:
+  db_data:
