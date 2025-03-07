@@ -21,26 +21,37 @@
     <main class="content">
         <!-- Top Bar -->
         <header class="top-bar">
-            <h1>@php $selectedCategory = request('category', 'All News');  echo $selectedCategory; @endphp</h1>
-            <form action="{{ route('dashboard') }}" method="GET" class="search-form">
-                <input type="hidden" value="@php
-                echo $selectedCategory;
-                @endphp" name="category">
-                <input type="text" name="search" class="searchInput" placeholder="Search news..." value="{{     request('search') }}">
-                <button type="submit">Search</button>
-            </form>
+            <h1 class="category-title">
+                @php $selectedCategory = request('category', 'All News');  echo $selectedCategory; @endphp
+            </h1>
+            <div class="search-user-container">
+                <form action="{{ route('dashboard') }}" method="GET" class="search-form">
+                    <input type="hidden" value="@php
+                    echo $selectedCategory;
+                    @endphp" name="category">
+                    <input type="text" name="search" class="searchInput" placeholder="Search news..." value="{{   request('search') }}">
+                    <button type="submit">Search</button>
+                </form>
+                <div class="user-profile" data-fullname="{{ auth()->user()->name ?? 'Guest' }}">
+                    {{-- <span class="user-name">{{ auth()->user()->name ?? 'Guest' }}</span> --}}
+                    <span class="user-name">
+                        {{ Str::limit(auth()->user()->name ?? 'Guest', 10, '...') }}
+                    </span>
+                </div>
+            </div>
+            <!-- User Profile Section -->
         </header>
         <!-- News Section -->
         <section class="news-container" id="newsContainer">
             @forelse ($news as $article)
                 <article class="news-card">
                     <img src="{{ $article->image ?? 'https://source.unsplash.com/400x200/?news' }}" alt="News">
-                    <h3>{{ $article->title }}</h3>
-                    <p class="news-content">{{ $article->content }}</p>
+                    <h3>{{ e($article->title) }}</h3>
+                    <p class="news-content">{{ e($article->content) }}</p>
                     <a href="{{ $article->source_url }}" target="_blank">Read More</a>
                 </article>
             @empty
-                <p>No description available in this category.</p>
+                <p>No news available in this category.</p>
             @endforelse
         </section>
          <!-- Pagination Links -->

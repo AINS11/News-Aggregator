@@ -4,6 +4,9 @@
         <button class="toggle-btn">☰</button>
     </div>
     <!-- Horizontal Line -->
+        <span class="user-name sidebar-username" style="display: none;">
+            {{ Str::limit(auth()->user()->name ?? 'Guest', 16, '...') }}
+        </span>
     <div class="divider"></div>
     <nav>
         <ul>

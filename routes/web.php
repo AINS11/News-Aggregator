@@ -29,10 +29,7 @@ Route::get('reset-password/{token}', [ResetPasswordController::class, 'showReset
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['verify.session.token'])->group(function () {
-    // Route::get('/dashboard', function () {
-    //     return view('home');
-    // })->name('dashboard');
-    Route::get('/dashboard', [ArticleController::class, 'ShowNews'])->name('dashboard');
+    Route::get('/dashboard', [ArticleController::class, 'ShowNews'])->middleware('throttle:15,1')->name('dashboard');
 });
 
 

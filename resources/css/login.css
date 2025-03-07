@@ -81,7 +81,72 @@ a {
 }
 
 @media (max-width: 480px) {
-    .login-container {
-        padding: 1.5rem;
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0 10px; /* Adds slight padding for better spacing */
     }
+
+    .login-container {
+        width: 100%;
+        max-width: 94%; /* Keeps form within screen width */
+        padding: 1.5rem;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        min-width: 350px;
+    }
+
+    .input-grp input {
+        font-size: 1rem;
+        padding: 12px; /* Larger padding for easy touch */
+    }
+
+    .password-wrapper button {
+        right: 15px; /* Adjust position for mobile */
+    }
+
+    .login-btn {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    .forgot-password, .new-user {
+        font-size: 0.85rem;
+    }
+}
+
+
+/* Password Wrapper */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px;
+}
+
+.password-wrapper button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.password-wrapper button img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.password-wrapper button:hover img {
+    opacity: 1;
 }

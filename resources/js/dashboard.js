@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     toggleBtn.addEventListener("click", function () {
         sidebar.classList.toggle("active");
+        if (sidebar.classList.contains("active")) {
+            document.querySelector(".sidebar-username").style.display = 'block';
+        } else {
+            document.querySelector(".sidebar-username").style.display = 'none';
+        }
     });
 
     const logoutBtn = document.getElementById("logout-btn");

@@ -5,6 +5,10 @@
     @vite(['resources/css/login.css'])
 @endpush
 
+@push('js')
+    @vite(['resources/js/authentication.js'])
+@endpush
+
 @section('content')
     <div class="login-container">
         <h2>Login</h2>
@@ -32,7 +36,12 @@
             </div>
             <div class="input-grp">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <div class="password-wrapper" >
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" id="togglePassword">
+                        <img src="{{ asset('storage/images/show.png') }}" id="toggleIcon" alt="Show Password" width="20">
+                    </button>
+                </div>
                 @error('password')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -40,7 +49,7 @@
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
-        <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+        <a href="/forgot-password" class="forgot-password" style="color: #6e8efb">Forgot Password?</a>
         <p class="register-link new-user">Don't have an account? <a href='/register'>Sign up here</a></p>
     </div>
 @endsection
