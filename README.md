@@ -87,7 +87,20 @@ To stop the containers, run:
    docker restart news-aggregator-app
    ```
 
+### Unit Testing
+Run the following command to execute unit tests:
+```bash
+php artisan test
+```
+
+### Enabling Scheduling
+To enable scheduling that fetches data every minute, run:
+```bash
+php artisan run:scheduler
+```
+
 ## API Documentation
 - [MediaStack API](https://mediastack.com/documentation)
 - [NewsAPI](https://newsapi.org/docs/endpoints/everything)
 - [The Guardian API](https://open-platform.theguardian.com/documentation)
+
